@@ -24,7 +24,7 @@ The default reasoning model is deliberately modest for a local capstone demonstr
 ## 3. Test with sample data
 
 ```bash
-cd /Users/aaroncolak/.codex/.chatgpt-projects/g-p-6a99ed7f59d88191b2ab7c9a1ef0abc0
+cd personal-assistant-capstone
 source .venv/bin/activate
 personal-assistant-mcp-demo --source demo --reasoning ollama
 ```

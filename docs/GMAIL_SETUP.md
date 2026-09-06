@@ -29,6 +29,8 @@ personal-assistant inbox --source gmail --db assistant.db
 
 On the first run, a browser opens for Google authorization. After approval, Google credentials are saved locally as `token.json`. This file is also excluded from Git.
 
+After completing the separate Calendar setup, add `--calendar google` so appointment and reservation reminders can be checked against existing events.
+
 The default Gmail query is:
 
 ```text

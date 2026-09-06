@@ -1,5 +1,7 @@
 # Personal Assistant Capstone
 
+[![tests](https://github.com/harpik-p/personal-assistant-capstone/actions/workflows/tests.yml/badge.svg)](https://github.com/harpik-p/personal-assistant-capstone/actions/workflows/tests.yml)
+
 A cohesive, safety-aware multi-agent system for turning personal information into useful actions. The project demonstrates the architecture in the capstone proposal while remaining runnable without access to a real inbox or calendar.
 
 The assistant is exposed through a **Model Context Protocol (MCP)** server built with `FastMCP`, matching the MCP client/server pattern used in the course.
@@ -43,22 +45,25 @@ Productivity Personalization Discovery
 
 Operational records (tasks, source-message IDs, reviewed decisions, and audit events) are kept in SQLite. Personal preferences are stored separately as meaningful memory records with confidence, confirmation, source, and recency metadata. Ollama's local `nomic-embed-text` model creates semantic vectors that are cached in SQLite. If Ollama is temporarily unavailable, retrieval safely falls back to deterministic keyword matching.
 
-## Run it
+## Quick reproducible demo
 
-Python 3.11 or later is required.
+Python 3.11 or later is required. This path uses sample data, makes no external
+account calls, and does not require Ollama or an API key.
 
 ```bash
+git clone https://github.com/harpik-p/personal-assistant-capstone.git
+cd personal-assistant-capstone
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
-ollama pull nomic-embed-text
-personal-assistant inbox --db demo.db
-personal-assistant activities --db demo.db
+ASSISTANT_MEMORY_MODE=lexical personal-assistant inbox --db demo.db
+ASSISTANT_MEMORY_MODE=lexical personal-assistant-mcp-demo --source demo
 ```
 
-Set `ASSISTANT_MEMORY_MODE=lexical` only when running without Ollama. Semantic
-retrieval is the default; `OLLAMA_EMBEDDING_MODEL` can select another installed
-embedding model.
+For the complete local configuration with semantic retrieval, install Ollama
+and run `ollama pull nomic-embed-text`. Semantic retrieval is the default;
+`ASSISTANT_MEMORY_MODE=lexical` is the offline fallback. See the
+[Ollama guide](docs/OLLAMA_SETUP.md) for local model reasoning.
 
 ## Run the MCP demonstration
 
@@ -112,7 +117,7 @@ personal-assistant-mcp-demo --source gmail --reasoning ollama
 
 ## Local decision dashboard
 
-The dashboard displays live tasks and pending approvals from `assistant.db`. It runs only on localhost and does not expose the database publicly. Start both the interface and its local data service with:
+The dashboard displays live tasks and pending approvals from `assistant.db`. It runs only on localhost and does not expose the database publicly. Node.js 22 and pnpm are required. Install dashboard packages once with `cd dashboard && pnpm install`, then start both the interface and its local data service with:
 
 ```bash
 cd dashboard
@@ -172,6 +177,12 @@ See [the evaluation report](docs/EVALUATION.md) for results, error analysis, and
 
 Calendar writes and permanent memory changes always require confirmation. All workflow decisions are written to the audit log.
 
+## Intentional workflow decisions
+
+- One email produces at most one task because the task represents handling and replying to that email. Its source link and notes retain the combined context.
+- Gmail and Google Calendar integrations are read-only. The assistant proposes local work instead of changing those services.
+- Only confirmed profile information becomes durable memory; conversational details are not automatically promoted.
+
 ## Connected services
 
 The current implementation includes read-only Gmail inbox/thread retrieval, read-only Google Calendar conflict checks, current news and Seattle activity sources, local SQLite tasks, and Ollama-backed vector memory. The interfaces in `src/personal_assistant/ports.py` keep these integrations replaceable—for example, a future task provider can replace local tasks without changing agent reasoning.
@@ -182,6 +193,5 @@ Keep credentials in environment variables or a secret manager. Never commit `.en
 
 - Add optional calendar-event creation behind explicit approval; Gmail and Calendar reads are implemented.
 - Add an optional external task-provider adapter; the current dashboard provides approval and task management.
-- Preserve one task per email as the intentional workflow unit; notes and the source link retain its combined context.
 - Add stronger retry and performance controls for scheduled execution.
 - Expand the labeled evaluation with anonymized real-world cases and model-confidence calibration.
