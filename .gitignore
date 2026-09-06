@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+*.egg-info/
+.DS_Store
+.pnpm-store/
+AGENTS.md
+dashboard/node_modules/
+dashboard/dist/
+*.db
+.env
+credentials.json
+token.json
+secrets/

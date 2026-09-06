@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "personal-assistant-capstone"
+version = "0.1.0"
+description = "A safe, multi-agent personal assistant capstone project"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["mcp>=1.2,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+gmail = [
+  "google-api-python-client>=2.140",
+  "google-auth-httplib2>=0.2",
+  "google-auth-oauthlib>=1.2",
+]
+llm = ["openai>=1.50", "pydantic>=2.8"]
+
+[project.scripts]
+personal-assistant = "personal_assistant.cli:main"
+personal-assistant-mcp = "personal_assistant.mcp_server:main"
+personal-assistant-mcp-demo = "personal_assistant.mcp_client_demo:main"
+personal-assistant-dashboard-api = "personal_assistant.dashboard_api:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

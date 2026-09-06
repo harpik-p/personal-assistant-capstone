@@ -1,0 +1,16 @@
+[
+  {"id":"form","subject":"Return permission form","body":"Please return the signed form by 2026-09-10.","actionable":true,"due_date":"2026-09-10","decision":"execute","kind":"create_task"},
+  {"id":"newsletter","subject":"September classroom newsletter","body":"Here are classroom photos and this month's news.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"},
+  {"id":"supplies","subject":"Bring science supplies","body":"Please bring the supplies next week.","actionable":true,"due_date":"2026-09-10","decision":"propose","kind":"create_task"},
+  {"id":"receipt","subject":"Your payment receipt","body":"Your payment was received successfully. No action is required.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"},
+  {"id":"call","subject":"Call the dentist","body":"Can you call the dentist by 2026-09-15?","actionable":true,"due_date":"2026-09-15","decision":"execute","kind":"create_task"},
+  {"id":"groceries","subject":"Groceries","body":"We need to buy ingredients for the weekend dinner.","actionable":true,"due_date":null,"decision":"propose","kind":"create_task"},
+  {"id":"promotion","subject":"Limited-time sale","body":"Save 30 percent on selected items today.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"},
+  {"id":"status","subject":"Delivery update","body":"Your package has shipped and is expected Friday.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"},
+  {"id":"booking","subject":"Book cooking class","body":"Remember to book the children's cooking class tomorrow.","actionable":true,"due_date":"2026-09-04","decision":"execute","kind":"create_task"},
+  {"id":"application","subject":"Submit program application","body":"The application is due 2026-09-20.","actionable":true,"due_date":"2026-09-20","decision":"execute","kind":"create_task"},
+  {"id":"form_followup","subject":"Re: Return permission form","body":"Please return the signed form by 2026-09-12.","actionable":true,"due_date":"2026-09-12","decision":"execute","kind":"update_task"},
+  {"id":"event_info","subject":"Museum event details","body":"The museum opens at 10 AM Saturday. Tickets are already confirmed.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"},
+  {"id":"implicit_request","subject":"Missing registration","body":"Would you mind sending the registration document when you have a chance?","actionable":true,"due_date":null,"decision":"propose","kind":"create_task"},
+  {"id":"weather_notice","subject":"Practice cancelled","body":"Due to severe weather, today's practice has been cancelled. No response is needed.","actionable":false,"due_date":null,"decision":"ignore","kind":"none"}
+]
